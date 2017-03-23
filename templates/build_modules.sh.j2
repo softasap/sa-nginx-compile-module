@@ -2,7 +2,7 @@
 
 set -e
 
-./configure {% for module in nginx_modules %} --add-dynamic-module=../{{module.name}}-module {% endfor %}
+./configure {% for param in nginx_core_configure %} {{param}} {% endfor %} {% for module in nginx_modules %} --add-dynamic-module=../{{module.name}}-module {% endfor %}
 
 make modules
 

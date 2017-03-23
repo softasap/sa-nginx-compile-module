@@ -19,6 +19,7 @@
       - libpcre3
       - libpcre3-dev
       - zlib1g-dev
+      - libssl-dev
     tags:
       - nginx_modules
 
