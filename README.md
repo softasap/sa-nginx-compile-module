@@ -3,7 +3,8 @@ sa-nginx-compile-module
 [![Build Status](https://travis-ci.org/softasap/sa-nginx-compile-module.svg?branch=master)](https://travis-ci.org/softasap/sa-nginx-compile-module)
 
 
-Helper role to compile custom set of dynamic modules for nginx
+Helper role to compile custom set of dynamic modules for nginx.
+Compiled modules would be in /tmp/nginx_modules/out ;
 
 
 Example of use: check box-example
