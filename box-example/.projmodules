@@ -1,0 +1,4 @@
+[submodule "roles/sa-nginx-compile-module"]
+        path = roles/sa-nginx-compile-module
+        url = https://github.com/softasap/sa-nginx-compile-module.git
+

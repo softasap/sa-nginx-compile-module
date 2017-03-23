@@ -1,0 +1,40 @@
+---
+# tasks file for sa-nginx-compile-module
+
+  - name: NGINX Modules | Ensure build dir exists
+    file: path="{{build_dir}}" state="directory"
+    tags:
+      - nginx_modules
+
+  - name: NGINX Modules | Ensure out dir exists
+    file: path="{{result_dir}}" state="directory"
+    tags:
+      - nginx_modules
+
+  - name: NGINX Modules | Download nginx source
+    get_url: url="http://nginx.org/download/nginx-{{nginx_version}}.tar.gz"  dest="{{build_dir}}/nginx.tar.gz"
+    tags:
+      - nginx_modules
+
+  - name: NGINX Modules | Unpack nginx source
+    unarchive: src="{{build_dir}}/nginx.tar.gz" dest="{{build_dir}}" remote_src=True
+    tags:
+      - nginx_modules
+
+  - name: NGINX Modules | Clone modules to compile
+    git: repo="{{item.repo}}" dest="{{build_dir}}/{{item.name}}-module"
+    with_items: "{{nginx_modules}}"
+    tags:
+      - nginx_modules
+
+  - name: NGINX Modules | Template builder logic
+    template: src="{{role_dir}}/templates/build_modules.sh.j2" dest="{{build_dir}}/nginx-{{nginx_version}}/build_modules.sh" mode=0755
+    tags:
+      - nginx_modules
+
+  - name: NGINX Modules | Compile dynamic Modules
+    shell: "./build_modules.sh"
+    tags:
+      - nginx_modules
+
+  - debug: msg="success"

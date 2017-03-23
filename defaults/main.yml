@@ -1,0 +1,18 @@
+---
+# defaults file for sa-nginx-compile-module
+# based on https://www.nginx.com/blog/compiling-dynamic-modules-nginx-plus/
+
+role_dir: "{{role_path}}"
+
+build_dir: "/tmp/nginx_modules"
+result_dir: "{{build_dir}}/out"
+
+nginx_version: 1.10.3
+nginx_source: "{{build_dir}}/nginx-{{nginx_version}}"
+
+
+nginx_modules:
+  - {
+      repo: "https://github.com/openresty/redis2-nginx-module.git",
+      name: ngx_redis2
+    }

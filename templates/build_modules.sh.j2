@@ -1,0 +1,7 @@
+#!/bin/bash
+
+./configure --with-compat {% for module in nginx_modules %} --add-dynamic-module=../{{module.name}}-module {% endfor %}
+
+make modules
+
+cp objs/*.so {{result_dir}}
