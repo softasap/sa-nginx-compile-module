@@ -51,8 +51,19 @@ nginx_core_configure: # for ubuntu
   - "--with-cc-opt='-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC'"
   - "--with-ld-opt='-Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie'"
 
+nginx_modules_dependencies:
+  - liblua5.1-dev
+
 nginx_modules:
   - {
       repo: "https://github.com/openresty/redis2-nginx-module.git",
       name: ngx_redis2
+    }
+  - {
+      repo: "https://github.com/openresty/lua-nginx-module.git",
+      name: ngx_http_lua
+    }
+  - {
+      repo: "https://github.com/simpl/ngx_devel_kit.git",
+      name: ngx_ndk
     }

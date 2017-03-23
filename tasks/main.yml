@@ -23,6 +23,13 @@
     tags:
       - nginx_modules
 
+  - name: NGINX Modules | Install dynamic
+    apt: pkg="{{item}}" state="present"
+    with_items: "{{nginx_modules_dependencies | default([])}}"
+    tags:
+      - nginx_modules
+
+
   - name: NGINX Modules | Download nginx source
     get_url: url="http://nginx.org/download/nginx-{{nginx_version}}.tar.gz"  dest="{{build_dir}}/nginx.tar.gz"
     tags:
